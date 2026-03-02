@@ -1,0 +1,506 @@
+/* Markdown Converter */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+    line-height: 1.5;
+    color: #000;
+    background-color: #ffffff;
+    margin: 0 !important;
+    padding: 20px !important;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+
+table {
+    border-collapse: collapse;
+    min-width: 60%;
+    max-width: 100%;
+    margin: 20px 0;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+table tr th {
+    background-color: #143452;
+    color: white;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 500;
+}
+
+.table-http th,
+.table-http td,
+table th,
+table td {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.tr-break {
+    background-color: #2d79b717 !important;
+}
+
+.tr-break td {
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+table tr td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+table tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.highlight {
+    background-color: #fff3cd !important;
+}
+
+a {
+    font-size: 14px;
+}
+
+code {
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Monaco', 'Consolas', monospace;
+    background: #fff8e4;
+    color: #333;
+    font-size: 13px;
+}
+
+pre code {
+    background-color: transparent;
+}
+
+pre {
+    background-color: #f8f8f2;
+    color: #000;
+    padding: 20px;
+    border-radius: 6px;
+    /* border-left: 4px solid #3498db; */
+    overflow-x: auto;
+}
+
+pre code.language-php,
+pre code.language-sql,
+pre code.language-javascript,
+pre code.language-bash,
+pre code.language-shell {
+    background-color: #abb2bf !important;
+    color: #282c34;
+}
+
+/* Syntax Highlighting */
+code span.kw {
+    color: #c678dd;
+    font-weight: bold;
+}
+
+/* Keyword */
+code span.dt {
+    color: #e5c07b;
+}
+
+/* Datatype */
+code span.dv {
+    color: #d19a66;
+}
+
+/* Decimal Value */
+code span.bn {
+    color: #d19a66;
+}
+
+/* Base N */
+code span.fl {
+    color: #d19a66;
+}
+
+/* Float */
+code span.ch {
+    color: #98c379;
+}
+
+/* Char */
+code span.st {
+    color: #98c379;
+}
+
+/* String */
+code span.co {
+    color: #5c6370;
+    font-style: italic;
+}
+
+/* Comment */
+code span.ot {
+    color: #e06c75;
+}
+
+/* Other */
+code span.al {
+    color: #e06c75;
+    font-weight: bold;
+}
+
+/* Alert */
+code span.fu {
+    color: #61afef;
+}
+
+/* Function */
+code span.er {
+    color: #e06c75;
+    font-weight: bold;
+}
+
+/* Error */
+code span.wa {
+    color: #e06c75;
+    font-style: italic;
+}
+
+/* Warning */
+code span.cn {
+    color: #d19a66;
+}
+
+/* Constant */
+code span.sc {
+    color: #e5c07b;
+}
+
+/* Special Char */
+code span.vs {
+    color: #98c379;
+}
+
+/* Verbatim String */
+code span.ss {
+    color: #98c379;
+}
+
+/* Special String */
+code span.im {
+    color: #c678dd;
+}
+
+/* Import */
+code span.va {
+    color: #e06c75;
+}
+
+/* Variable */
+code span.cf {
+    color: #c678dd;
+}
+
+/* Control Flow */
+code span.op {
+    color: #56b6c2;
+}
+
+/* Operator */
+code span.bu {
+    color: #e5c07b;
+}
+
+/* BuiltIn */
+code span.ex {
+    color: #d19a66;
+}
+
+/* Extension */
+code span.pp {
+    color: #e5c07b;
+}
+
+/* Preprocessor */
+code span.at {
+    color: #d19a66;
+}
+
+/* Attribute */
+code span.do {
+    color: #5c6370;
+    font-style: italic;
+}
+
+/* Documentation */
+code span.an {
+    color: #5c6370;
+    font-style: italic;
+}
+
+/* Annotation */
+code span.cv {
+    color: #5c6370;
+    font-style: italic;
+}
+
+/* Comment Var */
+code span.in {
+    color: #5c6370;
+    font-style: italic;
+}
+
+/* Information */
+
+ul,
+ol {
+    margin: 15px 0;
+    padding-left: 30px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+blockquote {
+    background-color: rgba(255, 255, 255, 0.69);
+    border-left: 4px solid #3498db;
+    padding: 0px 5px;
+    margin: 5px 0;
+    /* border-radius: 4px; */
+    color: #333;
+}
+
+pre code.language-json {
+    background-color: #0d1117 !important;
+    color: #58a6ff !important;
+    display: block;
+    font-size: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: -15px;
+}
+
+.table-http code {
+    font-size: 12px;
+}
+
+.table-http th:nth-child(1),
+.table-http td:nth-child(1) {
+    width: 8%;
+}
+
+/* HTTP Method */
+.table-http th:nth-child(2),
+.table-http td:nth-child(2) {
+    width: 15%;
+}
+
+/* URL */
+.table-http th:nth-child(3),
+.table-http td:nth-child(3) {
+    width: 19%;
+}
+
+/* Mô tả */
+.table-http th:nth-child(4),
+.table-http td:nth-child(4) {
+    width: 43%;
+}
+
+/* RewriteRule */
+.table-http th:nth-child(5),
+.table-http td:nth-child(5) {
+    width: 15%;
+}
+
+/* Ví dụ */
+
+pre,
+pre.sourceCode {
+    background-color: #c0c4c73b;
+}
+
+.sourceCode {
+    overflow: auto;
+}
+
+/* Pandoc highlight overrides */
+pre.sourceCode {
+    background: #f7f7f7;
+    border: 1px solid #e0e0e0;
+    padding: 16px;
+    border-radius: 6px;
+}
+
+.sourceCode code {
+    font-family: 'Monaco', 'Consolas', monospace;
+    font-size: 13px;
+}
+
+.sourceCode .kw {
+    color: #2a8ad4;
+    font-weight: 700;
+}
+
+/* keywords */
+.sourceCode .cf {
+    color: #2a8ad4;
+    font-weight: 700;
+}
+
+/* control flow */
+.sourceCode .dt {
+    color: #d73a49;
+}
+
+/* data types */
+.sourceCode .fu {
+    color: #8b5cf6;
+}
+
+/* functions */
+.sourceCode .op {
+    color: #2a8ad4;
+}
+
+/* operators */
+.sourceCode .st {
+    color: #0aa370;
+}
+
+/* strings */
+.sourceCode .dv,
+/* decimal values */
+.sourceCode .bn {
+    color: #c18401;
+}
+
+/* numbers */
+.sourceCode .fl {
+    color: #c18401;
+}
+
+/* floats */
+.sourceCode .ch {
+    color: #0aa370;
+}
+
+/* chars */
+.sourceCode .co {
+    color: #6a737d;
+    font-style: italic;
+}
+
+/* comments */
+.sourceCode .va {
+    color: #444;
+}
+
+/* variables */
+.sourceCode .cn {
+    color: #c18401;
+    font-weight: 700;
+}
+
+/* constants */
+.sourceCode .al {
+    color: #d73a49;
+    font-weight: 700;
+}
+
+/* alerts */
+.sourceCode .an {
+    color: #d73a49;
+    font-weight: 700;
+}
+
+/* annotations */
+.sourceCode .at {
+    color: #005cc5;
+}
+
+/* attributes */
+.sourceCode .im {
+    color: #005cc5;
+}
+
+/* imports */
+
+#TOC {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+#TOC>ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#TOC ul {
+    list-style: none;
+    padding-left: 20px;
+}
+
+#TOC li {
+    margin: 8px 0;
+}
+
+#TOC a {
+    text-decoration: none;
+    color: #0066cc;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+#TOC a:hover {
+    color: #004499;
+    text-decoration: underline;
+}
+
+#TOC>ul>li>a {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+}
+
+#TOC ul ul a {
+    font-size: 0.95em;
+    color: #555;
+}
+
+hr {
+    background: #cacaca;
+    border: 0;
+    height: 2px;
+    border-bottom: 2px solid;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.max-w-100 {
+    max-width: 100% !important;
+}
+
+.shadow-xs {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+    page-break-after: always;
+}
