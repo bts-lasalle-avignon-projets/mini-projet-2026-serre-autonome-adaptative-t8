@@ -78,7 +78,7 @@ Principe :
 - En utilisant les informations d'identification ci-dessus, il faut obtenir le jeton _OAuth2 Bearer_ :
 
 ```sh
-$ curl --location 'https://open.plantbook.io/api/v1/token/' --form 'grant_type="client_credentials"' --form 'client_id="XXXXXXXXXXXXXXXXXXXXXXXXXX"' --form 'client_secret="YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYyyyyy"'
+$ curl --location 'https://open.plantbook.io/api/v1/token/' --form 'grant_type="client_credentials"' --form 'client_id="QW44LFwBxdZzJeoHaE5AeBFU9jendoKCOJpLWlH2"' --form 'client_secret="YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYyyyyy"'
 {"access_token": "vQ2McKKk4vvOzjPz2ZtAgxEXM8fsE7", "expires_in": 86400, "token_type": "Bearer", "scope": "read write"}
 ```
 
@@ -106,7 +106,7 @@ $ curl --silent --location 'https://open.plantbook.io/api/v1/plant/search?alias=
 
 #### Rechercher des plantes
 
-Documentation : [Open Plantbook API Public](https://documenter.getpostman.com/view/12627470/TVsxBRjD#d8ed1e76-6866-493b-8ccf-dd8ee8688aa6)
+Documentation : [Open lantbook API Public](https://documenter.getpostman.com/view/12627470/TVsxBRjD#d8ed1e76-6866-493b-8ccf-dd8ee8688aa6)
 
 Il est possible de rechercher toute occurrence de texte dans les champs `display_pid` et `alias`, ainsi que les noms communs des plantes.
 
