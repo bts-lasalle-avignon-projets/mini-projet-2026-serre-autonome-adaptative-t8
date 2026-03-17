@@ -78,7 +78,7 @@ Principe :
 - En utilisant les informations d'identification ci-dessus, il faut obtenir le jeton _OAuth2 Bearer_ :
 
 ```sh
-$ curl --location 'https://open.plantbook.io/api/v1/token/' --form 'grant_type="client_credentials"' --form 'client_id="QW44LFwBxdZzJeoHaE5AeBFU9jendoKCOJpLWlH2"' --form 'client_secret="YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYyyyyy"'
+$ curl --location 'https://open.plantbook.io/api/v1/token/' --form 'grant_type="client_credentials"' --form 'client_id="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"' --form 'client_secret="YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYyyyyy"'
 {"access_token": "vQ2McKKk4vvOzjPz2ZtAgxEXM8fsE7", "expires_in": 86400, "token_type": "Bearer", "scope": "read write"}
 ```
 
