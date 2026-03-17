@@ -240,10 +240,31 @@ L'image de cette plante :
 ![](https://opb-img.plantbook.io/ocimum%20basilicum.jpg)
 
 ```sh
+curl --silent --location 'https://open.plantbook.io/api/v1/plant/search?alias=basilic' --header 'Authorization: Token 141c16127c00b409ba21fea487a26e509c337a9b' | jq
 
 ```
 
-Le _pid_ du "Basilic" est 
+Résultat:
+
+```sh
+
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "pid": "ocimum basilicum",
+      "display_pid": "Ocimum basilicum",
+      "alias": "ocimum basilicum",
+      "category": "Labiatae, Ocimum"
+    }
+  ]
+}
+
+```
+
+Le _pid_ du "Basilic" est ocimum basilicum 
 
 2. Donner la commande `curl` et le résultat obtenu pour récupérer les besoins vitaux de la plante dont le _pid_ est "lycopersicon esculentum".
 
@@ -251,18 +272,24 @@ Le _pid_ du "Basilic" est
 
 ```sh
 
+curl --silent --location 'https://open.plantbook.io/api/v1/plant/detail/lycopersicon%20esculentum/' --header 'Authorization: Token 141c16127c00b409ba21fea487a26e509c337a9b' | jq
+
 ```
+
+Résultat
+
+
 
 3. Identifier la description et les unités des paramètres fournis par la commande précédente.
 
-| Paramètre    | Description | Unité |
-| ------------ | ----------- | :---: |
-| "light_mmol" |             |       |
-| "light_lux"  |             |       |
-| "temp"       |             |       |
-| "env_humid"  |             |   %   |
-| "soil_moist" |             |       |
-| "soil_ec"    |             |       |
+| Paramètre    | Description                           | Unité       |
+| ------------ | ------------------------------------- | :---------: |
+| "light_mmol" | Rayonnement photosynthétiquement actif| μmol.m .s   |
+| "light_lux"  | Éclairement lumineux                  | lux         |
+| "temp"       | temperature de l'air                  |  °C         |
+| "env_humid"  | Humidité de l'air                     |   %         |
+| "soil_moist" | Humidité du sol                       |   %         |
+| "soil_ec"    | Conductivité du sol                   |   μS/cm     |
 
 On vous fournit le script Python [src/1-plantbook/plantbook.py](./src/1-plantbook/plantbook.py) qui permet d'effectuer des requêtes vers l'API d'_Open Plantbook_.
 
