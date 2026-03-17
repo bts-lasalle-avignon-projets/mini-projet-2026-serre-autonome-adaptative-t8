@@ -5,11 +5,13 @@ import requests
 from dotenv import load_dotenv
 
 # TODO: ajouter un fichier .env avec les variables d'environnement suivantes API_URL, CLIENT_ID, SECRET, TOKEN.
+
 load_dotenv()
 API_URL = os.getenv("API_URL", "https://open.plantbook.io/api/v1")
 client_id = os.getenv("CLIENT_ID")
 secret = os.getenv("SECRET")
 token = os.getenv("TOKEN")
+HEADERS = {"Authorization": f"token {token}"}
 
 def get_plantbook_token(client_id, secret):
     url =  f"{API_URL}/token/"
@@ -47,7 +49,21 @@ def rechercher_plante(nom_plante, token_type, token):
 
 def obtenir_details_plante(pid, token_type, token):
     # TODO
-    pass
+    url = "{}/plant/detail/{}/".format(API_URL, pid.replace(' ', '%20'))
+    headers = {"Authorization": "{} {}".format(token_type, token)}
+    
+    try:
+        resultats = requests.get(url, headers=headers)
+        resultats.raise_for_status()
+        details = resultats.json()
+
+        print("\nDétails de la plante({}):".format(pid))
+        print(json.dumps(details, indent=4))
+        return details
+    
+    except requests.exceptions.HTTPError as erreur:
+        print("Erreur lors de la récupération des détails :{}".format(erreur))
+        return None
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
