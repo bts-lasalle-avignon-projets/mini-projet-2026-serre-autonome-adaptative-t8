@@ -51,7 +51,7 @@ def obtenir_details_plante(pid, token_type, token):
     # TODO
     url = "{}/plant/detail/{}/".format(API_URL, pid.replace(' ', '%20'))
     headers = {"Authorization": "{} {}".format(token_type, token)}
-    
+
     try:
         resultats = requests.get(url, headers=headers)
         resultats.raise_for_status()
@@ -60,7 +60,7 @@ def obtenir_details_plante(pid, token_type, token):
         print("\nDétails de la plante({}):".format(pid))
         print(json.dumps(details, indent=4))
         return details
-    
+
     except requests.exceptions.HTTPError as erreur:
         print("Erreur lors de la récupération des détails :{}".format(erreur))
         return None

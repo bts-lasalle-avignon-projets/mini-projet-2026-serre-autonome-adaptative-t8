@@ -301,9 +301,118 @@ Usage: plantbook.py <nom_plante>
 4. Exécuter le script pour effectuer une recherche pour les plantes suivantes :
 
 - l'alias "Basilic"
+
+```sh
+btssn1@cv-pc-b20-04:~/tp_github/mini-projet-2026-serre-autonome-adaptative-t8/activites/src/1-plantbook$ python3 plantbook.py "Basilic"
+Recherche de la plante 'Basilic' dans Open Plantbook ...
+1 plante(s) trouvée(s)
+{
+	"count": 1,
+	"next": null,
+	"previous": null,
+	"results": [
+        {
+                "pid": "ocimum basilicum",
+                "display_pid": "Ocimum basilicum",
+                "alias": "ocimum basilicum",
+                "category": "Labiatae, Ocimum"
+        }
+	]
+}
+
+```
+
 - le _pid_ "ocimum basilicum"
+
+```sh
+btssn1@cv-pc-b20-04:~/tp_github/mini-projet-2026-serre-autonome-adaptative-t8/activites/src/1-plantbook$ python3 plantbook.py "ocimum basilicum"
+Recherche de la plante 'ocimum basilicum' dans Open Plantbook ...
+1 plante(s) trouvée(s)
+{
+	"count": 1,
+	"next": null,
+	"previous": null,
+	"results": [
+        {
+                "pid": "ocimum basilicum",
+                "display_pid": "Ocimum basilicum",
+                "alias": "ocimum basilicum",
+                "category": "Labiatae, Ocimum"
+        }
+	]
+}
+
+```
+
+
+
 - l'alias "tomato"
+
+```sh
+btssn1@cv-pc-b20-04:~/tp_github/mini-projet-2026-serre-autonome-adaptative-t8/activites/src/1-plantbook$ python3 plantbook.py "tomato"
+Recherche de la plante 'tomato' dans Open Plantbook ...
+7 plante(s) trouvée(s)
+{
+	"count": 7,
+	"next": null,
+	"previous": null,
+	"results": [
+        {
+                "pid": "cherry tomato pepe f1",
+                "display_pid": "Cherry Tomato Pepe F1",
+                "alias": "cherry tomato pepe f1",
+                "category": "Solanaceae, Solanum"
+        },
+        {
+                "pid": "tomato master no. 2 f1",
+                "display_pid": "Tomato Master No. 2 F1",
+                "alias": "tomato",
+                "category": "Solanaceae, Solanum"
+        },
+        {
+                "pid": "tomato takumi f1",
+                "display_pid": "Tomato Takumi F1",
+                "alias": "tomato takumi f1",
+                "category": "Solanaceae, Solanum"
+        },
+        {
+                "pid": "tomato motto f1",
+                "display_pid": "Tomato Motto F1",
+                "alias": "ornamental tomato",
+                "category": "Solanaceae, Solanum"
+        },
+        {
+                "pid": "tomato pink treat f1",
+                "display_pid": "Tomato Pink Treat F1",
+                "alias": "ornamental tomato",
+                "category": "Solanaceae, Solanum"
+        },
+        {
+                "pid": "tomato tex2720 f1",
+                "display_pid": "Tomato TEX2720 F1","alias": "tomato tex2720 f1",
+                "category": "Solanaceae, Solanum"
+        },
+        {
+                "pid": "tomato yellow ti 169 f1",
+                "display_pid": "Tomato Yellow TI 169 F1",
+                "alias": "tomato yellow ti 169 f1",
+                "category": "Solanaceae, Solanum"
+        }
+	]
+}
+
+```
+
 - l'alias "fraise"
+
+```sh
+btssn1@cv-pc-b20-04:~/tp_github/mini-projet-2026-serre-autonome-adaptative-t8/activites/src/1-plantbook$ python3 plantbook.py "fraise"
+Recherche de la plante 'fraise' dans Open Plantbook ...
+0 plante(s) trouvée(s)
+
+```
+
+
 
 5. Compléter le script pour obtenir les détails d'une plante à partir de son _pid_.
 
@@ -362,6 +471,29 @@ Détails de la plante (ocimum basilicum):
         }
     ]
 }
+
+```sh
+def obtenir_details_plante(pid, token_type, token):
+	# TODO
+	url = "{}/plant/detail/{}/".format(API_URL, pid.replace(' ', '%20'))
+	headers = {"Authorization": "{} {}".format(token_type, token)}
+
+	try:
+            resultats = requests.get(url, headers=headers)
+            resultats.raise_for_status()
+            details = resultats.json()
+
+            print("\nDétails de la plante({}):".format(pid))
+            print(json.dumps(details, indent=4))
+            return details
+
+	except requests.exceptions.HTTPError as erreur:
+            print("Erreur lors de la récupération des détails :{}".format(erreur))
+            return None
+
+```
+
+
 ```
 
 ---
