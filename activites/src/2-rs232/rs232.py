@@ -1,6 +1,6 @@
 import serial
 
-PORT = '/dev/ttyUSB0'  # Remplacer par le port série approprié
+PORT = '/dev/ttyUSB1'  # Remplacer par le port série approprié
 DEBIT = 9600  # Remplacer par le debit approprié
 
 try:
@@ -8,7 +8,7 @@ try:
     port_serie = serial.Serial(PORT, DEBIT, timeout=1)
     print(f"Port '{PORT}' ouvert")
     # Envoyer des données
-    message_envoye = "Hello Serial World!\r\n"
+    message_envoye = "Hello Serial Wordl!\r\n"
     print(f"Envoi : '{message_envoye.strip()}'")
     port_serie.write(message_envoye.encode('ascii'))
     # Lire des données
