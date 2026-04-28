@@ -330,6 +330,8 @@ Pré-requis :
 - Raspberry Pi : [src/2-rs232/rs232.py](./src/2-rs232/rs232.py)
 - ESP32 : [src/2-rs232/esp32-serial/src/main.cpp](./src/2-rs232/esp32-serial/src/main.cpp) (Projet [PlatformIO](./annexes/PlatformIO.md))
 
+  ![./images/capture-saleae](images/capture-saleae.png)
+
 3. Modifier les codes sources fournis pour valider un échange en respectant le protocole de communication à implémenter dans ce système.
 
 :warning: Vous pourrez terminer ce travail dans l'activité n°4 : [Finalisation des applications](./4-ir-finalisation.md)
