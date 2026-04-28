@@ -79,6 +79,15 @@ Pour ce circuit, il faut donc effectuer le cablage suivant :
 - [Wire.beginTransmission()](https://docs.arduino.cc/language-reference/en/functions/communication/wire/beginTransmission/)
 - [Wire.endTransmission()](https://docs.arduino.cc/language-reference/en/functions/communication/wire/endTransmission/) (cette fonction retourne `0` en cas de succès)
 
+```bash
+
+Scan du bus I2C en cours
+0x39 ok
+Scan du bus I2C en cours
+0x39 ok
+```
+
+
 > L'adresse `0x00` est une adresse de _broadcast_. Les adresses détectées seront affichées en hexadécimal, par exemple : `Serial.printf("0x%02X ok\n", adresse);`
 
 2. Écrire un programme dans [src/3-i2c/esp32-tsl2561/src/main.cpp](./src/3-i2c/esp32-tsl2561/src/main.cpp) pour mesurer périodiquement la luminosité en lux ($lx$) en utilisant le capteur [TSL2561.pdf](./datasheets/TSL2561.pdf).
