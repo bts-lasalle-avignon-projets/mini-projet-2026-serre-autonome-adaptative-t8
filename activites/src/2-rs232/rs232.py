@@ -1,6 +1,6 @@
 import serial
 
-PORT = '/dev/ttyUSB1'  # Remplacer par le port série approprié
+PORT = '/dev/ttyUSB0'  # Remplacer par le port série approprié
 DEBIT = 9600  # Remplacer par le debit approprié
 
 try:

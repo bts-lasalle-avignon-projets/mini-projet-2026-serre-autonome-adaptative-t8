@@ -175,4 +175,11 @@ void setup()
 void loop()
 {
     // TODO : mesurer périodiquement la luminosité en lux et l'afficher
+
+    capteurLuminosite.getLuminosity(&luminosite, &infraRouge);
+    lux = capteurLuminosite.calculateLux(luminosite, infraRouge);
+
+    afficherValeurs(lux, luminosite, infraRouge);
+
+    delay(PERIODE);
 }

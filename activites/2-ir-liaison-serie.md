@@ -320,17 +320,109 @@ Avec un [adaptateur RS232 TTL / USB](./annexes/Adaptateur-USB-RS232.md), il faut
 Pré-requis :
 
 - Vérifier la détection de l'[adaptateur RS232 TTL / USB](./annexes/Adaptateur-USB-RS232.md) (commandes `dmesg` et `lsusb`) et les droits d'accès au fichier de périphérique (commande `ls -l`)
+
+commande dmesg:
+
+```bash
+btssn1@cv-pc-b20-04:~/tp_github/mini-projet-2026-serre-autonome-adaptative-t8$ dmesg
+
+
+[10725.071812] usb 1-3: new high-speed USB device number 12 using xhci_hcd
+[10726.035868] usb 1-3: device descriptor read/64, error -71
+[10726.292042] usb 1-3: New USB device found, idVendor=0925, idProduct=3881, bcdDevice= 0.01
+[10726.292054] usb 1-3: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+[10726.337203] [UFW BLOCK] IN=eno1 OUT= MAC=d8:bb:c1:55:31:fe:00:fd:45:76:4f:c5:08:00 SRC=192.168.49.202 DST=192.168.55.4 LEN=276 TOS=0x00 PREC=0x00 TTL=64 ID=49298 PROTO=UDP SPT=161 DPT=51435 LEN=256 
+[10726.339849] [UFW BLOCK] IN=eno1 OUT= MAC=d8:bb:c1:55:31:fe:9c:ae:d3:af:12:dc:08:00 SRC=192.168.50.3 DST=192.168.55.4 LEN=176 TOS=0x00 PREC=0x00 TTL=64 ID=6905 DF PROTO=UDP SPT=161 DPT=51435 LEN=156 
+[10726.411855] usb 1-3: USB disconnect, device number 12
+[10728.199832] usb 1-3: new high-speed USB device number 13 using xhci_hcd
+[10728.352752] usb 1-3: New USB device found, idVendor=0925, idProduct=3881, bcdDevice= 0.00
+[10728.352764] usb 1-3: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[10728.352770] usb 1-3: Product: Logic
+[10728.352774] usb 1-3: Manufacturer: Saleae LLC
+[10729.863152] usb 1-3: USB disconnect, device number 13
+[10730.179808] usb 1-3: new high-speed USB device number 14 using xhci_hcd
+[10730.328610] usb 1-3: New USB device found, idVendor=0925, idProduct=3881, bcdDevice= 0.00
+[10730.328622] usb 1-3: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[10730.328628] usb 1-3: Product: Logic
+[10730.328632] usb 1-3: Manufacturer: Saleae LLC
+[10736.234823] usb 1-3: USB disconnect, device number 14
+[10736.543752] usb 1-3: new high-speed USB device number 15 using xhci_hcd
+[10736.951727] usb 1-3: device descriptor read/64, error -71
+[10738.023793] usb 1-3: device descriptor read/64, error -71
+[10738.263773] usb 1-3: new high-speed USB device number 16 using xhci_hcd
+[10738.412693] usb 1-3: New USB device found, idVendor=0925, idProduct=3881, bcdDevice= 0.00
+[10738.412705] usb 1-3: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[10738.412710] usb 1-3: Product: Logic
+[10738.412714] usb 1-3: Manufacturer: Saleae LLC
+[10739.415916] usb 1-3: USB disconnect, device number 16
+[10739.727772] usb 1-3: new high-speed USB device number 17 using xhci_hcd
+[10739.876435] usb 1-3: New USB device found, idVendor=0925, idProduct=3881, bcdDevice= 0.00
+[10739.876441] usb 1-3: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[10739.876443] usb 1-3: Product: Logic
+[10739.876445] usb 1-3: Manufacturer: Saleae LLC
+[10740.147735] usb 1-5: new full-speed USB device number 18 using xhci_hcd
+[10740.330889] usb 1-5: New USB device found, idVendor=10c4, idProduct=ea60, bcdDevice= 1.00
+[10740.330901] usb 1-5: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[10740.330907] usb 1-5: Product: CP2102 USB to UART Bridge Controller
+[10740.330911] usb 1-5: Manufacturer: Silicon Labs
+[10740.330915] usb 1-5: SerialNumber: 0001
+[10740.339748] cp210x 1-5:1.0: cp210x converter detected
+[10740.340624] usb 1-5: cp210x converter now attached to ttyUSB0
+
+```
+
+
+Commande lsubs:
+
+```bash
+btssn1@cv-pc-b20-04:~/tp_github/mini-projet-2026-serre-autonome-adaptative-t8$ lsusb
+Bus 001 Device 005: ID 10c4:ea60 Silicon Labs CP210x UART Bridge
+Bus 001 Device 007: ID 0925:3881 Lakeview Research Saleae Logic
+```
+
+Commande ls -l:
+
+```bash
+
+btssn1@cv-pc-b20-04:~/tp_github/mini-projet-2026-serre-autonome-adaptative-t8/activites/src/2-rs232$ ls -l
+total 12
+drwxrwxr-x 7 btssn1 btssn1 4096 mars  31 11:40 esp32-serial
+-rw-rw-r-- 1 btssn1 btssn1  180 mars  17 10:24 liste_ports.py
+-rwxrwxr-x 1 btssn1 btssn1 1023 avril 28 15:09 rs232.py
+
+```
+
+
 - Identifier le fichier de périphérique associé à la carte ESP32 et adapter le fichier [src/2-rs232/esp32-serial/platformio.ini](./src/2-rs232/esp32-serial/platformio.ini) si besoin (les champs `upload_port` et `monitor_port`)
 - Lister les ports disponibles avec le script [src/2-rs232/liste_ports.py](./src/2-rs232/liste_ports.py)
 
+```bash
+
+btssn1@cv-pc-b20-04:~/tp_github/mini-projet-2026-serre-autonome-adaptative-t8/activites/src/2-rs232$ python3 ./liste_ports.py 
+/dev/ttyS0: ttyS0
+/dev/ttyUSB0: USB-Serial Controller D
+
+```
+
+
 1. Réaliser le cablage de la liaison entre les deux équipements.
+
+![./images/capture-saleae](images/schéma de cablage.png)
+
 
 2. Valider un échange bidirectionnel entre les deux équipements avec les codes sources fournis :
 
 - Raspberry Pi : [src/2-rs232/rs232.py](./src/2-rs232/rs232.py)
 - ESP32 : [src/2-rs232/esp32-serial/src/main.cpp](./src/2-rs232/esp32-serial/src/main.cpp) (Projet [PlatformIO](./annexes/PlatformIO.md))
 
+
+Voici la trame envoyé : 
+
   ![./images/capture-saleae](images/capture-saleae.png)
+
+Voici le texte envoyé :
+
+  ![./images/capture-saleae](images/trame2.png)
 
 3. Modifier les codes sources fournis pour valider un échange en respectant le protocole de communication à implémenter dans ce système.
 

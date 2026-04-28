@@ -92,5 +92,15 @@ Scan du bus I2C en cours
 
 2. Écrire un programme dans [src/3-i2c/esp32-tsl2561/src/main.cpp](./src/3-i2c/esp32-tsl2561/src/main.cpp) pour mesurer périodiquement la luminosité en lux ($lx$) en utilisant le capteur [TSL2561.pdf](./datasheets/TSL2561.pdf).
 
+
+```bash
+
+lx;CH0;CH1
+43;0x111f;0x7c5
+81;0x264d;0x124d
+40;0xff3;0x735
+
+```
+
 ---
 BTS LaSalle Avignon 2026
