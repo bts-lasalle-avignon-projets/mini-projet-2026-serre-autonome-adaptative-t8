@@ -407,7 +407,7 @@ btssn1@cv-pc-b20-04:~/tp_github/mini-projet-2026-serre-autonome-adaptative-t8/ac
 
 1. Réaliser le cablage de la liaison entre les deux équipements.
 
-![./images/capture-saleae](images/schéma de cablage.png)
+  ![./images/schéma de cablage](images/schéma de cablage.png)
 
 
 2. Valider un échange bidirectionnel entre les deux équipements avec les codes sources fournis :
@@ -422,7 +422,7 @@ Voici la trame envoyé :
 
 Voici le texte envoyé :
 
-  ![./images/capture-saleae](images/trame2.png)
+  ![./images/trame2](images/trame2.png)
 
 3. Modifier les codes sources fournis pour valider un échange en respectant le protocole de communication à implémenter dans ce système.
 
