@@ -37,6 +37,9 @@
 #define ADRESSE_I2C_DEBUT 0x01
 #define ADRESSE_I2C_FIN   0x7F
 
+//Définir la broche de la LED (GPIO 2 )
+#define BROCHE_LED 2
+
 /*
 Documentation I2C address TSL2561
 TSL2561_ADDR_LOW   = 0x29   ///< Default address (pin pulled low)
@@ -80,11 +83,45 @@ ParametresPlante parametresPlante = {
     6000, 3600, 150, 100, 32, 8, 80, 30, 60, 15, 2000, 350
 }; // par défaut
 MesuresCapteurs mesuresCapteurs = { 0, 0, 0, 0, 0, 0 };
+unsigned long tempsPrecedentMesure = 0;
 
 // Fonctions
-void receptionnerParametresPlante()
+void receptionnerParametresPlante(int size)
 {
-    // TODO
+    if (Serial1.available()) {
+        String trame = Serial1.readStringUntil('\n');
+        if (trame.startsWith(String(DELIMITER_DEBUT_TRAME))) {
+            // On retire le délimiteur de début
+            trame.remove(0, 1);
+            
+            // Parsing des 12 champs
+            int indexChamp = 0;
+            int positionPointVirgule = 0;
+            while ((positionPointVirgule = trame.indexOf(DELIMITER_FIN_CHAMP)) != -1 && indexChamp < NB_CHAMPS_TRAME_PARAMETRES) {
+                String valeurStr = trame.substring(0, positionPointVirgule);
+                int valeur = (valeurStr == "") ? 0 : valeurStr.toInt();
+
+                // Affectation selon l'ordre du protocole
+                switch (indexChamp) {
+                    case 0:  parametresPlante.max_light_mmol = valeur; break;
+                    case 1:  parametresPlante.min_light_mmol = valeur; break;
+                    case 2:  parametresPlante.max_light_lux = valeur; break;
+                    case 3:  parametresPlante.min_light_lux = valeur; break;
+                    case 4:  parametresPlante.max_temp = valeur; break;
+                    case 5:  parametresPlante.min_temp = valeur; break;
+                    case 6:  parametresPlante.max_env_humid = valeur; break;
+                    case 7:  parametresPlante.min_env_humid = valeur; break;
+                    case 8:  parametresPlante.max_soil_moist = valeur; break;
+                    case 9:  parametresPlante.min_soil_moist = valeur; break;
+                    case 10: parametresPlante.max_soil_ec = valeur; break;
+                    case 11: parametresPlante.min_soil_ec = valeur; break;
+                }
+                trame.remove(0, positionPointVirgule + 1);
+                indexChamp++;
+            }
+        }
+    }
+
 #ifdef DEBUG
     // Afficher les paramètres de la structure parametresPlante
     Serial.println("Paramètres de la plante reçus :");
@@ -105,25 +142,49 @@ void receptionnerParametresPlante()
 
 void envoyerTrameMesures()
 {
-#ifdef DEBUG
-    // Afficher les mesures des capteurs
-    Serial.println("Mesures :");
-    Serial.println("  light_mmol : " + String(mesuresCapteurs.light_mmol) + " µmol/m²/s");
-    Serial.println("  light_lux : " + String(mesuresCapteurs.light_lux) + " lx");
-    Serial.println("  temp : " + String(mesuresCapteurs.temp) + " °C");
-    Serial.println("  env_humid : " + String(mesuresCapteurs.env_humid) + " %");
-    Serial.println("  soil_moist : " + String(mesuresCapteurs.soil_moist) + " %");
-    Serial.println("  soil_ec : " + String(mesuresCapteurs.soil_ec) + " µS/cm");
-#endif
-    // TODO
+    // Format : $;light_mmol;light_lux;temp;env_humid;soil_moist;soil_ec;;\r\n
+    String trame = String(DELIMITER_DEBUT_TRAME) + String(DELIMITER_FIN_CHAMP);
+    trame += String(mesuresCapteurs.light_mmol) + String(DELIMITER_FIN_CHAMP);
+    trame += String(mesuresCapteurs.light_lux) + String(DELIMITER_FIN_CHAMP);
+    trame += String(mesuresCapteurs.temp) + String(DELIMITER_FIN_CHAMP);
+    trame += String(mesuresCapteurs.env_humid) + String(DELIMITER_FIN_CHAMP);
+    trame += String(mesuresCapteurs.soil_moist) + String(DELIMITER_FIN_CHAMP);
+    trame += String(mesuresCapteurs.soil_ec) + String(DELIMITER_FIN_CHAMP);
+    trame += String(DELIMITER_FIN_CHAMP); // Champ vide final
+    trame += String(DELIMITER_FIN_TRAME);
+
+    Serial1.print(trame);
+    
+    #ifdef DEBUG
+    Serial.print("Trame envoyée au RPi : ");
+    Serial.print(trame);
+    #endif
 }
 
 void commanderActionneurs()
 {
+// Si la luminosité actuelle est inférieure au seuil minimum de la plante
+    if (mesuresCapteurs.light_lux < parametresPlante.min_light_lux) {
+        digitalWrite(BROCHE_LED, ON);  // Allumer l'éclairage
+    } else {
+        digitalWrite(BROCHE_LED, OFF); // Éteindre
+    }
 }
 
 void scanI2C()
 {
+    Serial.println("Scan du bus I2C en cours");
+
+    for(int adresse = ADRESSE_I2C_DEBUT; adresse <= ADRESSE_I2C_FIN; adresse++)
+    {
+        Wire.beginTransmission(adresse);
+        uint8_t erreur = Wire.endTransmission();
+
+        if(erreur == 0)
+        {
+            Serial.printf("0x%02X ok\n", adresse);
+        }
+    }
 }
 
 void configurerTSL2561(bool                     autoRange = true,
@@ -190,6 +251,9 @@ void setup()
                   FORMAT_PORT_SERIE_1,
                   BROCHE_PORT_SERIE_1_RX,
                   BROCHE_PORT_SERIE_1_TX);
+    Serial1.onReceive(receptionnerParametresPlante);
+
+    pinMode(BROCHE_LED, OUTPUT);
 
     // Définit la fonction de rappel appelée lors de la réception de données sur le port série 1
 
@@ -204,6 +268,14 @@ void setup()
     Wire.begin();
     // Scanne le bus I2C pour détecter les circuits présents
     scanI2C();
+
+    // Initialisation réelle du capteur de luminosité
+    if(!capteurLuminosite.begin()) {
+        Serial.println("Erreur : Capteur TSL2561 non détecté !");
+    } else {
+        configurerTSL2561(); // Appel de la fonction simple de config
+        Serial.println("Capteur TSL2561 prêt.");
+    }
 
 #ifdef MODE_SIMULATION
     Serial.println("Mode simulation active : mesures et envoi toutes les " +
@@ -227,4 +299,26 @@ void setup()
 
 void loop()
 {
+    unsigned long tempsActuel = millis();
+
+    // Envoi périodique des mesures
+    if (tempsActuel - tempsPrecedentMesure >= PERIODE_MESURE) {
+        tempsPrecedentMesure = tempsActuel;
+
+        #ifdef MODE_SIMULATION
+        mesuresCapteurs.light_lux = random(500, 20000);
+        mesuresCapteurs.temp = random(18, 30);
+        mesuresCapteurs.env_humid = random(40, 70);
+        mesuresCapteurs.soil_moist = random(20, 80);
+        #else
+        sensors_event_t event;
+        capteurLuminosite.getEvent(&event);
+        if (event.light) {
+            mesuresCapteurs.light_lux = (uint32_t)event.light;
+        }
+        #endif
+
+        envoyerTrameMesures();
+        commanderActionneurs();
+    }
 }

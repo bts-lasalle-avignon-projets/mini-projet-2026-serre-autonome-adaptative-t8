@@ -79,8 +79,21 @@ def rechercher_plante(nom_plante, token_type, token):
 
 def obtenir_details_plante(pid, token_type, token):
     # TODO
-    pass
-    #return reponses
+    url = "{}/plant/detail/{}/".format(API_URL, pid.replace(' ', '%20'))
+    headers = {"Authorization": "{} {}".format(token_type, token)}
+
+    try:
+        resultats = requests.get(url, headers=headers)
+        resultats.raise_for_status()
+        details = resultats.json()
+
+        print("\nDétails de la plante({}):".format(pid))
+        print(json.dumps(details, indent=4))
+        return details
+
+    except requests.exceptions.HTTPError as erreur:
+        print("Erreur lors de la récupération des détails :{}".format(erreur))
+        return None
 
 # --- Configuration de Flask ---
 def create_app():
@@ -138,7 +151,8 @@ def transferer_parametres_plante():
             print(f"Envoi trame : '{trame_parametres.strip()}'")
             print(f"Nb d'octets à envoyer : {len(trame_parametres.encode('ascii'))}")
             # TODO : envoyer la trame sur le port série et afficher le nombre d'octets envoyés
-            #print(f"Nb octets envoyés : {nb}")
+            nb_octets = port_serie.write(trame_parametres.encode('ascii'))
+            print(f"Nb octets envoyés : {nb_octets}")
             # Affiche la trame envoyée
             return render_template('transfert.html', transfert={"trame": trame_parametres.strip(), "display_pid": details.get("display_pid", pid)})
         else:
