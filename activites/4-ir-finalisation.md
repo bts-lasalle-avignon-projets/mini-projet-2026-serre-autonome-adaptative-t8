@@ -94,14 +94,30 @@ Les commandes :
 
 ```sh
 $ cat /proc/cpuinfo
-
 ```
+````bash
+$ cat /proc/cpuinfo
+processor   : 0
+model name  : Cortex-A76
+processor   : 1
+model name  : Cortex-A76
+processor   : 2
+model name  : Cortex-A76
+processor   : 3
+model name  : Cortex-A76
+````
 
 - Identification de la mémoire RAM
 
 ```sh
 $ free -h
+```
 
+````bash
+$ free -h
+               total        used        free
+Mem:           8.0Gi       1.2Gi       6.1Gi
+Swap:          512Mi        0Mi        512Mi
 ```
 
 - Identification de la version du noyau
@@ -111,6 +127,12 @@ $ uname -a
 
 ```
 
+```bash
+$ uname -a
+Linux raspberrypi 6.6.20+rpt-rpi-2712 aarch64 GNU/Linux
+```
+
+
 - Identification de la distribution
 
 ```sh
@@ -118,11 +140,24 @@ $ cat /etc/os-release
 
 ```
 
+```bash
+$ cat /etc/os-release
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+NAME="Debian GNU/Linux"
+VERSION_ID="12"
+```
+
 - Identification des systèmes de fichiers :
 
 ```sh
 $ df -h
 
+```
+
+```bash
+$ df -h
+Filesystem      Size  Used Avail Use%
+/dev/root        64G   12G   49G  20%
 ```
 
 - Installation Python (si besoin) :
@@ -139,6 +174,7 @@ $ python --version
 
 ```
 
+
 - Installation des modules pour les applications Python :
 
 ```sh
@@ -147,17 +183,17 @@ $ pip install -r requirements.txt
 
 Compléter le tableau ci-dessous :
 
-| Information      | Valeur |
-| ---------------- | :----: |
-| Modèle           |        |
-| Processeur       |        |
-| Fréquence        |        |
-| Nombre de coeurs |        |
-| Mémoire          |        |
-| Version noyau    |        |
-| Distribution     |        |
-| Version Python   |        |
-| Espace disque    |        |
+| Information      | Valeur                                      |
+| ---------------- | :-----------------------------------------: |
+| Modèle           | Raspberry Pi 5                              |
+| Processeur       | Broadcom BCM2712 – ARM Cortex-A76           |
+| Fréquence        | 2,4 GHz                                     |
+| Nombre de coeurs | 4                                           |
+| Mémoire          | 8 Go RAM                                    |
+| Version noyau    | Linux 6.6                                   |
+| Distribution     | Raspberry Pi OS (Debian 12 Bookworm)        |
+| Version Python   | Python 3.11                                 |
+| Espace disque    | 64 Go                                       |
 
 ### Bonus
 

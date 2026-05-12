@@ -140,20 +140,28 @@ def transferer_parametres_plante():
     pid = request.form['pid']
     token_type, token = get_plantbook_token(client_id, secret)
     details = obtenir_details_plante(pid, token_type, token)
+    
     if details:
-        # Transférer les paramètres sur le port série dans une trame au format $${valeur_parametre};\r\n
+        cles_seuils = [
+            "max_light_mmol", "min_light_mmol",
+            "max_light_lux", "min_light_lux",
+            "max_temp", "min_temp",
+            "max_env_humid", "min_env_humid",
+            "max_soil_moist", "min_soil_moist",
+            "max_soil_ec", "min_soil_ec"
+        ]
+        
         trame_parametres = "$"
-        for key, value in details.items():
-            if key not in ["pid","display_pid","alias","category","image_url","common_names"]:
-                trame_parametres += f"{value};"
+        for key in cles_seuils:
+            value = details.get(key, 0)
+            trame_parametres += f"{value};"
         trame_parametres += "\r\n"
+        
         if port_serie.is_open:
             print(f"Envoi trame : '{trame_parametres.strip()}'")
             print(f"Nb d'octets à envoyer : {len(trame_parametres.encode('ascii'))}")
-            # TODO : envoyer la trame sur le port série et afficher le nombre d'octets envoyés
             nb_octets = port_serie.write(trame_parametres.encode('ascii'))
             print(f"Nb octets envoyés : {nb_octets}")
-            # Affiche la trame envoyée
             return render_template('transfert.html', transfert={"trame": trame_parametres.strip(), "display_pid": details.get("display_pid", pid)})
         else:
             abort(404, description="Port non disponible !")
