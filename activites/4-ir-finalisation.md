@@ -94,9 +94,6 @@ Les commandes :
 
 ```sh
 $ cat /proc/cpuinfo
-```
-````bash
-$ cat /proc/cpuinfo
 processor   : 0
 model name  : Cortex-A76
 processor   : 1
@@ -105,15 +102,11 @@ processor   : 2
 model name  : Cortex-A76
 processor   : 3
 model name  : Cortex-A76
-````
+```
 
 - Identification de la mémoire RAM
 
-```sh
-$ free -h
-```
-
-````bash
+```bash
 $ free -h
                total        used        free
 Mem:           8.0Gi       1.2Gi       6.1Gi
@@ -121,11 +114,6 @@ Swap:          512Mi        0Mi        512Mi
 ```
 
 - Identification de la version du noyau
-
-```sh
-$ uname -a
-
-```
 
 ```bash
 $ uname -a
@@ -135,11 +123,6 @@ Linux raspberrypi 6.6.20+rpt-rpi-2712 aarch64 GNU/Linux
 
 - Identification de la distribution
 
-```sh
-$ cat /etc/os-release
-
-```
-
 ```bash
 $ cat /etc/os-release
 PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
@@ -148,11 +131,6 @@ VERSION_ID="12"
 ```
 
 - Identification des systèmes de fichiers :
-
-```sh
-$ df -h
-
-```
 
 ```bash
 $ df -h
