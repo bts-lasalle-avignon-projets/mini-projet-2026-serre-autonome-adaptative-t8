@@ -126,20 +126,9 @@ sequenceDiagram
 
 ## Ressources
 
-L'équipe pourra s'appuyer sur les ressources techniques suivantes identifiées lors de l'avant-projet :
+- Documentation officielle pour récupérer les données biologiques des plantes (_Token_ requis) : [Open Plantbook API](https://open.plantbook.io/)
 
-- **L'API indispensable :**
-  - [Open Plantbook API](https://open.plantbook.io/) : Documentation officielle pour récupérer les données biologiques des plantes (_Token_ requis).
-- **Tutoriels et exemples de réalisation :**
-  - **Makery :** "[La serre connectée DIY venue du Japon](https://www.makery.info/2017/04/28/agriculture-la-serre-connectee-diy-venue-du-japon/)" (référence pour le design et l'approche open-source).
-  - **Instructables :** "[Mini Serre Connectée](https://www.instructables.com/Tutorial-FR-Mini-Serre-Connect%C3%A9e/)" (Tutoriel technique pas à pas).
-  - **Terra Potager :** "[Fabriquer une serre à semis autonome](https://terra-potager.com/tuto-fabriquer-une-serre-a-semis-quasi-autonome/)" (focus sur la gestion des semis).
-
-Vidéo d'un projet de serre (BTS SN 2018 LaSalle Avignon) :
-
-[<img src="https://img.youtube.com/vi/9m6yN0EPijA/maxresdefault.jpg" width="50%">](https://youtu.be/9m6yN0EPijA)
-
-## Calendrier 2026
+## Activités
 
 | Séance |              Date               |           Matière           | Activités                                                                                             |
 | :----: | :-----------------------------: | :-------------------------: | :---------------------------------------------------------------------------------------------------- |
@@ -154,20 +143,19 @@ Vidéo d'un projet de serre (BTS SN 2018 LaSalle Avignon) :
 |   9    | **12 mai**<br />(13h30 - 17h10) | **Sciences Physiques + IR** | Oral de présentation<br />Démonstration                                                               |
 |   10   | **12 mai**<br />(16h35 - 17h10) | **Sciences Physiques + IR** | Rangement du matériel<br />Bilan                                                                      |
 
-## Ordre de passage (oral)
+## Applications
 
-La durée de l'oral est de **15 minutes** (10 minutes de présentation et 5 minutes de démonstration).
+Le système est piloté par trois applications :
 
-| Équipe | Noms  |    Horaire    |
-| :----: | :---: | :-----------: |
-|   1    |       | 13h35 - 13h50 |
-|   2    |       | 13h55 - 14h10 |
-|   3    |       | 14h15 - 14h30 |
-|   4    |       | 14h35 - 14h50 |
-|   5    |       | 14h55 - 15h10 |
-|   6    |       | 15h20 - 15h35 |
-|   7    |       | 15h40 - 15h55 |
-|   8    |       | 16h00 - 16h15 |
+- [Raspberry Pi](../src/raspberry-pi/README.md) : [app_web.py](../src/raspberry-pi/app_web.py) et [reception_mesures.py](../src/raspberry-pi/reception_mesures.py)
+- [ESP32](../src/esp32/README.md) : [main.cpp](../src/esp32/src/main.cpp)
+
+> Les codes sources des différentes applications sont situés à la racine du dépôt dans le répertoire [src](../src/).
+
+## Auteurs
+
+- DELGRANGE Théo
+- BEDEAU Tony
 
 ---
-BTS LaSalle Avignon 2026 - M. VAIRA & Mme DOAT
+BTS CIEL IR LaSalle Avignon 2026
